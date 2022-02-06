@@ -1,0 +1,45 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+public class Main {
+	public static void main(String[] args) {
+		File file = new File("YourFile.txt");   //  input ur "txt" file here
+		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+			StringBuilder sb = new StringBuilder();
+			String text = "";
+			for (; (text = br.readLine()) != null;) {
+				sb.append(text);
+				System.out.println(sb);
+				String line = sb.toString();
+				System.out.println();
+				char[] mas = line.toCharArray();
+				int n = 0;
+				int h = 0;
+				char[] heti = new char[mas.length];				
+				 here: for (int i = 0; i < mas.length; i++) {
+					 h=0;					
+					 for (int j = 0; j < mas.length; j++) {							
+						if (heti[j]==mas[i] ) {
+							h++;							
+						} else if(h>0){							
+							continue here;
+						}						
+					}
+					heti[i] = mas[i];					
+					for (int j = 0; j < heti.length; j++) {
+						if (heti[i] == mas[j]) {
+							n++;
+						}
+					} System.out.println(heti[i]+" called "+n+" times");
+					 n=0;					
+				}
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}  //  multi catch missed T-T
+	}
+}
